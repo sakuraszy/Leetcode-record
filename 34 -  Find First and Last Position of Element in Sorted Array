@@ -1,0 +1,63 @@
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        result = []
+        def recurs(pre,nums,target):
+            print(nums)
+            if len(nums)==0:
+                return
+            if len(nums)==1:
+                if nums[0]==target:
+                    result.append(pre)
+                return
+            if target > nums[-1]:
+                return
+            l = len(nums)
+            half = l//2
+            recurs(pre,nums[:half],target)
+            recurs(pre+half,nums[half:],target)
+        recurs(0,nums,target)
+        if len(result)==0:
+            return [-1,-1]
+        return ([min(result),max(result)])
+
+##recursion
+
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        result = []
+        left = 0
+        right = len(nums)-1
+        while(left <= right):
+            #print(nums[left:right+1])
+            mid =(left+right)//2
+            #print(mid)
+            if nums[mid]>target:
+                right = mid-1
+            elif nums[mid]<target:
+                left = mid+1
+            else:
+                if mid==0 or nums[mid-1]!=nums[mid]:
+                    result.append(mid)
+                    break
+                else:
+                    right=mid-1
+        if len(result)!= 1:
+            return [-1,-1]
+        left = 0
+        right = len(nums)
+        while(left <= right):
+            mid =(left+right)//2
+            if nums[mid]>target:
+                right = mid-1
+            elif nums[mid]< target:
+                left =mid+1
+            else:
+                if mid ==len(nums)-1 or nums[mid+1]!=nums[mid]:
+                    result.append(mid)
+                    break
+                else:
+                    left =mid+1
+        return result
+
+##binary search
+
