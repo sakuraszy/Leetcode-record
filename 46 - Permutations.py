@@ -13,3 +13,5 @@ class Solution(object):
                     recur(p+[numss[i]],numss[:i]+numss[i+1:])
         recur(list(),nums)
         return result
+
+

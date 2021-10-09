@@ -15,3 +15,21 @@ class Solution:
                 laste = inter[1]
         result.append([start,laste])
         return result
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        if len(intervals)==0:
+            return intervals
+        result=[]
+        intervals.sort(key=lambda x:x[0])
+        last=intervals[0][0]
+        current=intervals[0][1]
+        for interval in intervals[1:]:
+            if interval[0]>current:
+                result.append([last,current])
+                last=interval[0]
+                current=interval[1]
+            else:
+                current=max(interval[1],current)
+        result.append([last,current])
+        return result
